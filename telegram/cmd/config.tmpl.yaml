@@ -1,0 +1,21 @@
+#  /*
+#    copyright © 2022 by @https://github.com/Chuiko-GIT
+#  */
+
+delivery:
+  http-server:
+    log-requests: true
+    listen-address: 0.0.0.0:8080
+    read-timeout: 60s
+    write-timeout: 60s
+    body-size-limit: 10128
+    graceful-timeout: 60
+
+logger:
+  mode: dev
+  log-format: json
+  log-level: debug
+  datetime-format: "2006-01-02 15:04:05"
+  use-timestamp: false
+  include-caller-method: true
+
