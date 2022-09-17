@@ -10,6 +10,7 @@ import (
 	"telegram/internal/config"
 )
 
+// initConfig initializes config.
 func (a *App) initConfig() {
 	var err error
 

@@ -21,6 +21,9 @@ func (d Delivery) Validate() []string {
 	if e := d.HTTPServer.Validate(); len(e) > 0 {
 		errs = append(errs, e...)
 	}
+	if e := d.TelegramBot.Validate(); len(e) > 0 {
+		errs = append(errs, e...)
+	}
 
 	return errs
 }
@@ -42,6 +45,16 @@ func (h HTTPServer) Validate() []string {
 	}
 	if h.GracefulTimeout == 0 {
 		errs = append(errs, "graceful_timeout::is_required")
+	}
+
+	return errs
+}
+
+// Validate validates struct accordingly to fields tags
+func (t TelegramBot) Validate() []string {
+	var errs []string
+	if t.Token == "" {
+		errs = append(errs, "token::is_required")
 	}
 
 	return errs

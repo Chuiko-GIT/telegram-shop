@@ -16,7 +16,7 @@ import (
 
 // Block information for the application.
 var (
-	appName       = "telegram-service"
+	appName       = "tlgrm-service"
 	version       string
 	commit        string
 	tag           string
