@@ -22,4 +22,6 @@ logger:
 telegram-bot:
   debug: true
   token: "telegram-bot-token"
+  binance:
+    binance-course-url: "https://api.binance.com/api/v3/ticker/price?symbol="
 

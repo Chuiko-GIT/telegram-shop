@@ -43,8 +43,10 @@ type (
 		telegramBot *tgbotapi.BotAPI
 
 		// Delivery dependencies.
-		statusHTTPHandler delivery.StatusHTTPHandler
-		telegramHandler   delivery.TelegramHandler
+		statusHTTPHandler      delivery.StatusHTTPHandler
+		infoTelegramHandler    delivery.InfoTelegramHandler
+		usersTelegramHandler   delivery.UsersTelegramHandler
+		binanceTelegramHandler delivery.BinanceTelegramHandler
 
 		// Services dependencies.
 

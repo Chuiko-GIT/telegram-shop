@@ -16,9 +16,19 @@ type (
 		CheckStatus(ctx *fiber.Ctx) error
 	}
 
-	// TelegramHandler - describes an interface for work with telegram bot.
-	TelegramHandler interface {
+	// InfoTelegramHandler - describes an interface for work with telegram bot.
+	InfoTelegramHandler interface {
 		Start(message *tgbotapi.Message) error
 		Default(message *tgbotapi.Message) error
+		Info(message *tgbotapi.Message) error
+	}
+
+	// UsersTelegramHandler - describes an interface for work with telegram bot.
+	UsersTelegramHandler interface {
+		RegistrationUser(message *tgbotapi.Message) error
+	}
+
+	BinanceTelegramHandler interface {
+		CryptoCourseToUSDT(message *tgbotapi.Message) error
 	}
 )
