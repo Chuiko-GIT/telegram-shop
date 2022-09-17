@@ -18,20 +18,27 @@ func serveTelegram(ctx context.Context, a *App) {
 		a.logger.Fatalf("🔴 GetUpdatesChan telegram: %v", err)
 	}
 
-	for update := range updates {
-		if update.Message == nil { // ignore any non-Message Updates
-			continue
-		}
+	for {
+		select {
+		case update := <-updates:
+			if update.Message == nil { // ignore any non-Message Updates
+				continue
+			}
 
-		// Handle commands
-		if update.Message.IsCommand() {
-			a.registerTelegramRouter(update.Message)
-			continue
-		}
+			// Handle commands
+			if update.Message.IsCommand() {
+				a.registerTelegramRouter(update.Message)
+				continue
+			}
 
-		//// Handle regular messages
-		//if err := botApi.handleMessage(update.Message); err != nil {
-		//	botApi.handleError(update.Message.Chat.ID, err)
-		//}
+			//// Handle regular messages
+			//if err := botApi.handleMessage(update.Message); err != nil {
+			//	botApi.handleError(update.Message.Chat.ID, err)
+			//}
+
+		case <-ctx.Done():
+			a.logger.Info("🔴 telegram bot gracefully stopped")
+			return
+		}
 	}
 }
