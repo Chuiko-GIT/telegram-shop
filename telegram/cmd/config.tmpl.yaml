@@ -19,3 +19,7 @@ logger:
   use-timestamp: false
   include-caller-method: true
 
+telegram-bot:
+  debug: true
+  token: "telegram-bot-token"
+

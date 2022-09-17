@@ -6,6 +6,7 @@ package app
 
 import (
 	"context"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"telegram/internal/api/delivery"
 	"telegram/internal/config"
 	responder "telegram/pkg/http/respoder"
@@ -37,11 +38,13 @@ type (
 		// Tech dependencies.
 		config *config.Config
 
-		responder responder.Responder
-		logger    log.Logger
+		responder   responder.Responder
+		logger      log.Logger
+		telegramBot *tgbotapi.BotAPI
 
 		// Delivery dependencies.
 		statusHTTPHandler delivery.StatusHTTPHandler
+		telegramHandler   delivery.TelegramHandler
 
 		// Services dependencies.
 
@@ -63,10 +66,12 @@ func (a *App) Run(ctx context.Context) {
 
 	// Register Dependencies
 	a.initLogger()
+	a.initTelegramBot()
 
 	// Domain registration.
 
 	// Register Handlers
+	a.registerTelegramHandlers()
 	a.registerHTTPHandlers()
 
 	// Run Workers

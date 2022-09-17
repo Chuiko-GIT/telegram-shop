@@ -6,6 +6,7 @@ package app
 
 func (a *App) initWorkers() []worker {
 	workers := []worker{
+		serveTelegram,
 		serveHTTP,
 	}
 

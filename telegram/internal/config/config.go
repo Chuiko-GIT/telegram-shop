@@ -27,7 +27,8 @@ type (
 
 	// Delivery - define delivery configuration.
 	Delivery struct {
-		HTTPServer HTTPServer `yaml:"http-server"`
+		HTTPServer  HTTPServer  `yaml:"http-server"`
+		TelegramBot TelegramBot `yaml:"telegram-bot"`
 	}
 
 	// HTTPServer - define http configuration.
@@ -38,6 +39,12 @@ type (
 		WriteTimeout       time.Duration `yaml:"write-timeout"`
 		BodySizeLimitBytes int           `yaml:"body-size-limit"`
 		GracefulTimeout    int           `yaml:"graceful-timeout"`
+	}
+
+	// TelegramBot - define telegram bot configuration.
+	TelegramBot struct {
+		Debug bool   `yaml:"debug"`
+		Token string `yaml:"token"`
 	}
 )
 
