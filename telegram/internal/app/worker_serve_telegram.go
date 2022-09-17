@@ -9,6 +9,7 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+// serveTelegram - serve telegram bot.
 func serveTelegram(ctx context.Context, a *App) {
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
@@ -27,14 +28,17 @@ func serveTelegram(ctx context.Context, a *App) {
 
 			// Handle commands
 			if update.Message.IsCommand() {
-				a.registerTelegramRouter(update.Message)
+				if err = a.registerTelegramRouter(update.Message); err != nil {
+					a.logger.Error(err)
+				}
 				continue
 			}
 
-			//// Handle regular messages
-			//if err := botApi.handleMessage(update.Message); err != nil {
-			//	botApi.handleError(update.Message.Chat.ID, err)
-			//}
+			// Handle regular messages
+			if err = a.registerTelegramRouter(update.Message); err != nil {
+				a.logger.Error(err)
+				continue
+			}
 
 		case <-ctx.Done():
 			a.logger.Info("🔴 telegram bot gracefully stopped")

@@ -43,8 +43,14 @@ type (
 
 	// TelegramBot - define telegram bot configuration.
 	TelegramBot struct {
-		Debug bool   `yaml:"debug"`
-		Token string `yaml:"token"`
+		Debug   bool    `yaml:"debug"`
+		Token   string  `yaml:"token"`
+		Binance Binance `yaml:"binance"`
+	}
+
+	// Binance - define binance configuration.
+	Binance struct {
+		BinanceCourseURL string `yaml:"binance-course-url"`
 	}
 )
 
